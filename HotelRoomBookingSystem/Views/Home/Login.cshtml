@@ -33,7 +33,7 @@
                     <a href="#" class="login-link">Forgot Password?</a>
                 </div>
                 <div class="text-center mt-2">
-                    <p class="login-link">Don't have an account? <a href="/Account/Register" class="login-link">Register</a></p>
+                    <p class="login-link">Don't have an account? @Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "login-link" })</p>
                 </div>
             </div>
         </div>
