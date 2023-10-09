@@ -8,13 +8,21 @@ namespace HotelRoomBookingSystem.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        /// <summary>
+        /// This is Main home page design
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
 
-        
-       
+
+
+
     }
 }

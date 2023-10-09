@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Hotel Room Booking System</title>
+    <!-- Include Bootstrap CSS link here -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Include custom CSS styles if needed -->
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container login-container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 login-form">
+                <h2 class="login-heading">Login</h2>
+                <form asp-action="Login" asp-controller="Account" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control login-input" id="UserName" name="UserName" placeholder="Enter your username" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control login-input" id="Password" name="Password" placeholder="Enter your password" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block login-btn-primary">Login</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="#" class="login-link">Forgot Password?</a>
+                </div>
+                <div class="text-center mt-2">
+                    <p class="login-link">Don't have an account? <a href="/Account/Register" class="login-link">Register</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap and jQuery scripts here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+k7DhjVFFv2k2a5/dqV2I5tr5p" crossorigin="anonymous"></script>
+</body>
+</html>
+
