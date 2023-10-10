@@ -131,7 +131,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\images\colorful_betta_fish-wallpaper-1366x768.jpg" />
     <Content Include="Content\images\room3.jpg" />
     <Content Include="Content\images\room4.jpg" />
     <Content Include="favicon.ico" />
@@ -168,6 +170,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

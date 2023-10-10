@@ -8,8 +8,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>HomeLayout</title>
+    <title>Home</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 
 
 </head>
@@ -31,29 +33,42 @@
                             @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/About">About Us</a>
+                            @Html.ActionLink("Contact Us", "ContactUs", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/Contact">Contact Us</a>
+                            @Html.ActionLink("About Us", "AboutUs", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid p-0">
         @RenderBody() <!-- This is where the content of individual pages will be rendered -->
     </div>
-    <footer class="bg-light text-center py-3">
+    <footer class="bg-light">
         <div class="container">
-            <p>&copy; @DateTime.Now.Year Hotel Room Booking System</p>
-        </div>
-    </footer>
+            <div class="row">
 
+                <div class="col-md-12 text-center text-black mt-3">
+                    <h5>Follow Us</h5>
+                    <a class="text-info " href="https://www.facebook.com/nibinb2"><i class="fa fa-facebook"></i></a>
+                    <a class="text-info" href="https://www.instagram.com/nibin_e/"><i class="fa fa-instagram"></i></a>
+                    <a class="text-info" href="https://www.linkedin.com/in/nibinbasheer"><i class="fa fa-linkedin"></i></a><br>
+                    <p>&copy; @DateTime.Now.Year Hotel Room Booking System<br>Website designed by Nibin Basheer</p>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </footer>
+    @*<p></p>*@
     <!-- Include Bootstrap and jQuery scripts here -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/popper.min.js"></script> <!-- Use the local Popper.js script -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+k7DhjVFFv2k2a5/dqV2I5tr5p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
 
 
 

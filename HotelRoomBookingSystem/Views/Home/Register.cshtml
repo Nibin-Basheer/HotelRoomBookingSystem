@@ -16,8 +16,8 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h2 class="text-center">Register</h2>
+            <div class="col-md-4">
+                <h2 class="text-center mt-2">Register</h2>
                 <form asp-action="Register" asp-controller="Account" method="post">
                     <div class="form-group">
                         <label for="FirstName">First Name</label>
@@ -57,19 +57,19 @@
                     <div class="form-group">
                         <label for="State">State</label>
                         <select class="form-control" id="State" name="State" required>
-                            
+
                             <option value="State1">Kerala</option>
                             <option value="State2">Tamilnadu</option>
-                         
+
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="City">City</label>
                         <select class="form-control" id="City" name="City" required>
-                            
+
                             <option value="City1">kannur</option>
                             <option value="City2">Chennai</option>
-                            
+
                         </select>
                     </div>
                     <div class="form-group">
@@ -81,14 +81,18 @@
                         <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required />
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <div class="text-center mt-2">
+                        <p class="login-link">Already have an account? @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "login-link" })</p>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
     <!-- Include Bootstrap and jQuery scripts here -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+k7DhjVFFv2k2a5/dqV2I5tr5p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
 
