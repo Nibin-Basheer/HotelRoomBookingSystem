@@ -1,0 +1,74 @@
+﻿@model HotelRoomBookingSystem.Models.AdminRegistration
+@{
+    ViewBag.Title = "AdminRegister";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Hotel Room Booking System</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h2 class="text-center mt-2">Admin Register</h2>
+                @using (Html.BeginForm("AdminRegisterClick", "Admin", FormMethod.Post))
+                {
+
+                    <form>
+
+
+
+                        <div class="form-group">
+                            <label for="FirstName">Name</label>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger small" })
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="EmailAddress">Email Address</label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
+
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger small" })
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="ConfirmPassword">Confirm Password</label>
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger small" })
+
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button><span>@Html.DisplayFor(m => m.Message, new { @class = "text-success small" })</span>
+
+                        <div class="text-center mt-2">
+                            <p class="login-link">Already have an account? @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "login-link" })</p>
+                        </div>
+                    </form>
+
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap and jQuery scripts here -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

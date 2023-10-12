@@ -43,10 +43,7 @@ namespace HotelRoomBookingSystem.Controllers
         {
             return View();
         }
-        public ActionResult UserHome()
-        {
-            return View();
-        }
+        
 
         public ActionResult RegisterClick(UserRegistration userregistration)
         {
@@ -70,12 +67,12 @@ namespace HotelRoomBookingSystem.Controllers
             if (isValidLogin)
             {
                 Session["Email"] = login.Email;
-                return RedirectToAction("UserHome");
+                return RedirectToAction("UserHome","User");
             }
             else
             {
                 ModelState.Clear();
-                login.message = "invalid Login";
+                login.Message = "invalid Login";
                 return View("Login", login);
             }
         }

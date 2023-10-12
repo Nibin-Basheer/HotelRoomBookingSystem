@@ -53,11 +53,11 @@ namespace HotelRoomBookingSystem.Repository
         }
         public bool LoginUser(Login login)
         {
-            SqlCommand sqlcommand = new SqlCommand("",sqlconnection);
+            SqlCommand sqlcommand = new SqlCommand("LoginUser", sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
 
             sqlcommand.Parameters.AddWithValue("@Email", login.Email);
-            sqlcommand.Parameters.AddWithValue("@Password", login.password);
+            sqlcommand.Parameters.AddWithValue("@Password", login.Password);
 
 
             SqlParameter sqlparameter = new SqlParameter();
@@ -81,4 +81,98 @@ namespace HotelRoomBookingSystem.Repository
             }
 
         }
+
+        public bool PasswordChange(Password password)
+        {
+            // Retrieve the email from the session
+            string userEmail = HttpContext.Current.Session["Email"].ToString();
+
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                SqlCommand sqlcommand = new SqlCommand("ChangePassword", sqlconnection);
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+                sqlcommand.Parameters.AddWithValue("@Email", userEmail);
+                sqlcommand.Parameters.AddWithValue("@Oldpassword", password.Oldpassword);
+                sqlcommand.Parameters.AddWithValue("@NewPassword", password.Newpassword);
+
+                SqlParameter sqlparameter = new SqlParameter();
+                sqlparameter.DbType = DbType.Int32;
+                sqlparameter.ParameterName = "@status";
+                sqlparameter.Direction = ParameterDirection.Output;
+
+                sqlcommand.Parameters.Add(sqlparameter);
+                sqlconnection.Open();
+                sqlcommand.ExecuteNonQuery();
+                sqlconnection.Close();
+                int output = Convert.ToInt32(sqlparameter.Value);
+
+                if (output > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+       
+                return false;
+            }
+        }
+        public bool UserProfile(UserProfile userprofile)
+        {
+            string userEmail = HttpContext.Current.Session["Email"].ToString();
+            SqlCommand sqlcommand = new SqlCommand("UserProfile", sqlconnection);
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+            sqlcommand.Parameters.AddWithValue("@Email", userEmail);
+            sqlconnection.Open();
+            SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
+            if (sqldatareader.Read())
+            {
+                userprofile.FirstName = sqldatareader["FirstName"].ToString();
+                userprofile.LastName = sqldatareader["LastName"].ToString();
+                userprofile.Gender = sqldatareader["Gender"].ToString();
+                userprofile.Address = sqldatareader["Address"].ToString();
+                userprofile.Phone = sqldatareader["Phone"].ToString();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
+        public bool EditProfile(UserProfile userprofile)
+        {
+            string userEmail = HttpContext.Current.Session["Email"].ToString();
+            SqlCommand sqlcommand = new SqlCommand("EditProfile", sqlconnection);
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+            sqlcommand.Parameters.AddWithValue("@Email", userEmail);
+            sqlcommand.Parameters.AddWithValue("@FirstName", userprofile.FirstName);
+            sqlcommand.Parameters.AddWithValue("@LastName", userprofile.LastName);
+            sqlcommand.Parameters.AddWithValue("@Gender", userprofile.Gender);
+            sqlcommand.Parameters.AddWithValue("@Phone", userprofile.Phone);
+            sqlcommand.Parameters.AddWithValue("@Address", userprofile.Address);
+           
+
+            sqlconnection.Open();
+            int value = sqlcommand.ExecuteNonQuery();
+            sqlconnection.Close();
+            if (value > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+    }
 }

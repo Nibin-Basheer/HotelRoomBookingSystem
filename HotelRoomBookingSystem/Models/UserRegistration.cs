@@ -47,13 +47,13 @@ namespace HotelRoomBookingSystem.Models
        {
         new SelectListItem { Value = "Kerala", Text = "Kerala" },
         new SelectListItem { Value = "Tamilnadu", Text = "Tamilnadu" },
-        // Add more states as needed
+        
        };
         public List<SelectListItem> Cities { get; set; } = new List<SelectListItem>
        {
         new SelectListItem { Value = "Kannur", Text = "Kannur" },
         new SelectListItem { Value = "Chennai", Text = "Chennai" },
-        // Add more cities as needed
+        
        };
 
     }

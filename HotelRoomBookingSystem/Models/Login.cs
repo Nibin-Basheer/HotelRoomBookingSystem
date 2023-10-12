@@ -12,8 +12,8 @@ namespace HotelRoomBookingSystem.Models
         [EmailAddress(ErrorMessage = "Enter valid address")]
         public string Email { set; get; }
         [Required(ErrorMessage = "Enter Password")]
-        public string password { set; get; }
-        public string message { set; get; }
+        public string Password { set; get; }
+        public string Message { set; get; }
 
     }
 }
