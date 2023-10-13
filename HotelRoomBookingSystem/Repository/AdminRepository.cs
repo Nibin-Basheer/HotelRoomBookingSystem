@@ -44,5 +44,43 @@ namespace HotelRoomBookingSystem.Repository
             }
 
         }
+        public bool LoginAdmin(AdminLogin adminlogin)
+        {
+            try
+            {
+                SqlCommand sqlcommand = new SqlCommand("LoginAdmin", sqlconnection);
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+
+                sqlcommand.Parameters.AddWithValue("@Email", adminlogin.Email);
+                sqlcommand.Parameters.AddWithValue("@Password", adminlogin.Password);
+
+
+                SqlParameter sqlparameter = new SqlParameter();
+                sqlparameter.DbType = DbType.Int32;
+                sqlparameter.ParameterName = "@status";
+                sqlparameter.Direction = ParameterDirection.Output;
+
+
+                sqlcommand.Parameters.Add(sqlparameter);
+                sqlconnection.Open();
+                sqlcommand.ExecuteNonQuery();
+                sqlconnection.Close();
+                int output = Convert.ToInt32(sqlparameter.Value);
+                if (output == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error while logging in.", ex);
+            }
+
+        }
     }
 }

@@ -103,7 +103,7 @@
                     @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger small" })
 
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Register</button><span>@Html.DisplayFor(m => m.message,new {@class="text-success small" })</span>
+                <button type="submit" class="btn btn-primary btn-block">Register</button><span>@Html.DisplayFor(m => m.message,"",new {@class="text-success small" })</span>
                 
                 <div class="text-center mt-2">
                     <p class="login-link">Already have an account? @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "login-link" })</p>

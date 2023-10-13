@@ -62,10 +62,10 @@ namespace HotelRoomBookingSystem.Controllers
         {
 
             repository.EditProfile(userprofile);
-            
+
             userprofile.Message = "Updated...!";
 
-            return View("ProfileLoad" ,new UserProfile
+            return View("ProfileLoad", new UserProfile
             {
                 FirstName = userprofile.FirstName,
                 LastName = userprofile.LastName,
@@ -75,6 +75,11 @@ namespace HotelRoomBookingSystem.Controllers
 
             });
 
+        }
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return RedirectToAction("Login", "Home");
         }
     }
 }
