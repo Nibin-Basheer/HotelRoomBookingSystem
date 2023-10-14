@@ -82,5 +82,58 @@ namespace HotelRoomBookingSystem.Repository
             }
 
         }
+        public bool AddNewAdmin(AdminRegistration adminregistration)
+        {
+            SqlCommand sqlcommand = new SqlCommand("AddAdmin", sqlconnection);
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+            sqlcommand.Parameters.AddWithValue("@Name", adminregistration.Name);
+            sqlcommand.Parameters.AddWithValue("@Email", adminregistration.Email);
+            sqlcommand.Parameters.AddWithValue("@Password", adminregistration.Password);
+
+            sqlconnection.Open();
+            int value = sqlcommand.ExecuteNonQuery();
+            sqlconnection.Close();
+            if (value > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public List<UserRegistration> DisplayAllUser(UserRegistration useregistration)
+        {
+            List<UserRegistration> userlist = new List<UserRegistration>();
+            SqlCommand sqlcommand = new SqlCommand("DisplayAllUser", sqlconnection);
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+            sqlconnection.Open();
+            SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
+            while(sqldatareader.Read())
+            {
+                UserRegistration userdata= new UserRegistration
+                {
+                    FirstName = sqldatareader["FirstName"].ToString(),
+                    LastName = sqldatareader["LastName"].ToString(),
+                    DateOfBirth = sqldatareader.GetDateTime(sqldatareader.GetOrdinal("Dob")),
+                    Gender=sqldatareader["Gender"].ToString(),
+                    Phone = sqldatareader["Phone"].ToString(),
+                    Email = sqldatareader["Email"].ToString(),
+                    Address = sqldatareader["Address"].ToString(),
+                    State = sqldatareader["State"].ToString(),
+                    City = sqldatareader["City"].ToString(),
+                    Password = sqldatareader["Password"].ToString(),
+
+                    
+                };
+                userlist.Add(userdata);
+            }
+            return userlist;
+            
+
+          
+
+        }
     }
 }

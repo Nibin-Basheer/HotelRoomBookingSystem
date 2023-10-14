@@ -65,16 +65,8 @@ namespace HotelRoomBookingSystem.Controllers
 
             userprofile.Message = "Updated...!";
 
-            return View("ProfileLoad", new UserProfile
-            {
-                FirstName = userprofile.FirstName,
-                LastName = userprofile.LastName,
-                Gender = userprofile.Gender,
-                Address = userprofile.Address,
-                Phone = userprofile.Phone
-
-            });
-
+            return View("ProfileLoad");
+           
         }
         public ActionResult Logout()
         {

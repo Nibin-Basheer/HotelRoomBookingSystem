@@ -68,7 +68,7 @@ namespace HotelRoomBookingSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.AddAdmin(adminregistration);
+                repository.AddNewAdmin(adminregistration);
                 adminregistration.Message = "New Admin is Added";
                 return View("AdminAdd", adminregistration);
 
@@ -79,6 +79,10 @@ namespace HotelRoomBookingSystem.Controllers
         {
             Session.RemoveAll();
             return RedirectToAction("AdminLogin","Admin");
+        }
+        public ActionResult ViewUsers(UserRegistration userregistration)
+        {
+            return View(repository.DisplayAllUser(userregistration).ToList());
         }
     }
 }
