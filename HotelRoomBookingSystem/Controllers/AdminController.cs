@@ -84,5 +84,23 @@ namespace HotelRoomBookingSystem.Controllers
         {
             return View(repository.DisplayAllUser(userregistration).ToList());
         }
+
+        public ActionResult AddRoom()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddRoom(Rooms rooms)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.AddRoom(rooms);
+                rooms.Message = "New Room is Added";
+                return View("AddRoom", rooms);
+
+            }
+            return View("AddRoom", rooms);
+        }
     }
 }

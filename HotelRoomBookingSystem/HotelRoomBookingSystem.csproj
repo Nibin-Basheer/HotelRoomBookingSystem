@@ -130,6 +130,7 @@
     <Compile Include="Models\AdminRegistration.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Password.cs" />
+    <Compile Include="Models\Rooms.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +194,7 @@
     <Content Include="Views\Admin\AdminHome.cshtml" />
     <Content Include="Views\Admin\AdminAdd.cshtml" />
     <Content Include="Views\Admin\ViewUsers.cshtml" />
+    <Content Include="Views\Admin\AddRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -26,9 +26,52 @@
 
         <!-- Slides -->
         <div class="carousel-inner w-100">
+            <div class="carousel-caption">
+
+                <form action="@Url.Action("SearchRooms", "Room")" method="post">
+                    <div class="row">
+                        <!-- First Row -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="checkInDate">Check-In Date:</label>
+                                <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkOutDate">Check-Out Date:</label>
+                                <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required>
+                            </div>
+                        </div>
+                        <!-- Second Row -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="roomType">Room Type:</label>
+                                <select class="form-control" id="roomType" name="roomType" required>
+                                    <option value="Standard">Standard</option>
+                                    <option value="Deluxe">Deluxe</option>
+                                    <option value="Suite">Suite</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="adults">Adults:</label>
+                                <input type="number" class="form-control" id="adults" name="adults" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="children">Children:</label>
+                                <input type="number" class="form-control" id="children" name="children" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Search</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </form>
+            </div>
             <div class="carousel-item">
                 <img src="~/Content/images/room4.jpg" alt="Image 1" class="w-100 fixed-image">
             </div>
+
             <div class="carousel-item active">
                 <img src="~/Content/images/room3.jpg" alt="Image 2" class="w-100 fixed-image">
             </div>

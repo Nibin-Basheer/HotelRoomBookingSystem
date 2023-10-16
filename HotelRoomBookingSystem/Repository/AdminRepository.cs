@@ -135,5 +135,29 @@ namespace HotelRoomBookingSystem.Repository
           
 
         }
+        public bool AddRoom(Rooms rooms)
+        {
+            SqlCommand sqlcommand = new SqlCommand("AddRoom", sqlconnection);
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+            sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
+            sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
+            sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
+            sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
+            sqlcommand.Parameters.AddWithValue("@NumberOfBeds", rooms.NumberOfBeds);
+            sqlcommand.Parameters.AddWithValue("@RoomFeatures", rooms.Features);
+            sqlcommand.Parameters.AddWithValue("@Availablity", rooms.Availablity);
+            sqlconnection.Open();
+            int value = sqlcommand.ExecuteNonQuery();
+            sqlconnection.Close();
+            if (value > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

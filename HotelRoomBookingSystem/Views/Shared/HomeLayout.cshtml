@@ -29,8 +29,14 @@
                         <li class="nav-item">
                             @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Login
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="loginDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Login", "Home")">User Login</a>
+                                <a class="dropdown-item" href="@Url.Action("AdminLogin", "Admin")">Admin Login</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Contact Us", "ContactUs", "Home", new { area = "" }, new { @class = "nav-link" })
@@ -38,6 +44,7 @@
                         <li class="nav-item">
                             @Html.ActionLink("About Us", "AboutUs", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
+
                     </ul>
                 </div>
             </div>

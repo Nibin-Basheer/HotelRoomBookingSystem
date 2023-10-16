@@ -60,10 +60,11 @@ namespace HotelRoomBookingSystem.Controllers
         }
         public ActionResult ProfileEdit(UserProfile userprofile)
         {
-
+            if (ModelState.IsValid) { 
             repository.EditProfile(userprofile);
 
             userprofile.Message = "Updated...!";
+            }
 
             return View("ProfileLoad");
            
