@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -78,7 +79,7 @@ namespace HotelRoomBookingSystem.Controllers
         public ActionResult AdminLogout()
         {
             Session.RemoveAll();
-            return RedirectToAction("AdminLogin","Admin");
+            return RedirectToAction("AdminLogin", "Admin");
         }
         public ActionResult ViewUsers(UserRegistration userregistration)
         {
@@ -91,16 +92,32 @@ namespace HotelRoomBookingSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRoom(Rooms rooms)
+        public ActionResult AddRoom(Rooms rooms, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    var location = Server.MapPath("~/Content/images");
+                    string path = Path.Combine(location, filename);
+                    file.SaveAs(path);
+
+                    var fullpath = Path.Combine("~\\images", filename);
+                    rooms.RoomImage = fullpath;//set
+
+                }
                 repository.AddRoom(rooms);
                 rooms.Message = "New Room is Added";
                 return View("AddRoom", rooms);
 
             }
             return View("AddRoom", rooms);
+        }
+        public ActionResult GetAllRooms()
+        {
+           
+            return View(repository.GetAllRooms().ToList());
         }
     }
 }

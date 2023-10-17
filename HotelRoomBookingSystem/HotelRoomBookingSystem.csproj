@@ -145,6 +145,7 @@
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\images\colorful_betta_fish-wallpaper-1366x768.jpg" />
+    <Content Include="Content\images\room01.jpg" />
     <Content Include="Content\images\room3.jpg" />
     <Content Include="Content\images\room4.jpg" />
     <Content Include="favicon.ico" />
@@ -195,6 +196,7 @@
     <Content Include="Views\Admin\AdminAdd.cshtml" />
     <Content Include="Views\Admin\ViewUsers.cshtml" />
     <Content Include="Views\Admin\AddRoom.cshtml" />
+    <Content Include="Views\Admin\GetAllRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

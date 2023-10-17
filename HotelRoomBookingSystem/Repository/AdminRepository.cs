@@ -105,6 +105,7 @@ namespace HotelRoomBookingSystem.Repository
         }
         public List<UserRegistration> DisplayAllUser(UserRegistration useregistration)
         {
+            try {
             List<UserRegistration> userlist = new List<UserRegistration>();
             SqlCommand sqlcommand = new SqlCommand("DisplayAllUser", sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
@@ -130,9 +131,15 @@ namespace HotelRoomBookingSystem.Repository
                 userlist.Add(userdata);
             }
             return userlist;
-            
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
 
-          
+
+
+
 
         }
         public bool AddRoom(Rooms rooms)
@@ -140,6 +147,7 @@ namespace HotelRoomBookingSystem.Repository
             SqlCommand sqlcommand = new SqlCommand("AddRoom", sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
             sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
+            sqlcommand.Parameters.AddWithValue("@RoomImage", rooms.RoomImage);
             sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
             sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
             sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
@@ -159,5 +167,48 @@ namespace HotelRoomBookingSystem.Repository
             }
 
         }
+        public List<Rooms> GetAllRooms()
+        {
+            try {
+            List<Rooms> roomList = new List<Rooms>();
+
+
+            SqlCommand sqlcommand = new SqlCommand("GetRooms",sqlconnection);
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+            sqlconnection.Open();
+            SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
+
+            while (sqldatareader.Read())
+            {
+                Rooms roomdata = new Rooms
+                {
+                    RoomNumber = sqldatareader["RoomNumber"].ToString(),
+                    RoomImage = sqldatareader["RoomImage"].ToString(),
+                    RoomDescription = sqldatareader["RoomDescription"].ToString(),
+                    PricePerDay = Convert.ToDecimal(sqldatareader["PricePerDay"]),
+                    MaximumCapacity = Convert.ToInt32(sqldatareader["MaximumCapacity"]),
+                    NumberOfBeds = Convert.ToInt32(sqldatareader["NumberOfBeds"]),
+                    Features = sqldatareader["Features"].ToString(),
+                    Availablity = sqldatareader["Availablity"].ToString(),
+            
+
+
+                };
+                roomList.Add(roomdata);
+            }
+            return roomList;
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+
+
+
+
+        }
+
+           
+        
     }
 }

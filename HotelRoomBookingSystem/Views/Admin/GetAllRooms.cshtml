@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HotelRoomBookingSystem.Models.Rooms>
+
+@{
+    ViewBag.Title = "GetAllRooms";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>GetAllRooms</h2>
+
+<p>
+    @Html.ActionLink("Create New Room Details", "AddRoom")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Room Number</th>
+            <th>Room Image</th>
+            <th>Room Type</th>
+            <th>Room Description</th>
+            <th>Price Per Day</th>
+            <th>Maximum Capacity</th>
+            <th>Number of Beds</th>
+            <th>Features</th>
+            <th>Availability</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PricePerDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfBeds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Features)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Availablity)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditRoom", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "DetailsRoom", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "DeleteRoom", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

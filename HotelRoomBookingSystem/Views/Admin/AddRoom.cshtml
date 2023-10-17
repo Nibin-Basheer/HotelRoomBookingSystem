@@ -1,132 +1,94 @@
 ﻿@model HotelRoomBookingSystem.Models.Rooms
-
 @{
     ViewBag.Title = "AddRoom";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>AddRoom</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Rooms</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h2 class="text-center mt-2">Add New Room</h2>
+                @using (Html.BeginForm("AddRoom", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group">
+                        <label for="RoomNumber">Room Number</label>
+                        @Html.TextBoxFor(model => model.RoomNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="RoomImage">Room Image</label>
+                        @Html.TextBox("file", "", new { Type = "file" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="RoomType">Room Type</label>
+                        @Html.TextBoxFor(model => model.RoomType, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RoomType, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="RoomDescription">Room Description</label>
+                        @Html.TextBoxFor(model => model.RoomDescription, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RoomDescription, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PricePerDay">Price Per Day</label>
+                        @Html.TextBoxFor(model => model.PricePerDay, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PricePerDay, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MaximumCapacity">Maximum Capacity</label>
+                        @Html.TextBoxFor(model => model.MaximumCapacity, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaximumCapacity, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NumberOfBeds">Number of Beds</label>
+                        @Html.TextBoxFor(model => model.NumberOfBeds, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NumberOfBeds, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Features">Room Features</label>
+                        @Html.TextBoxFor(model => model.Features, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Availablity">Availability</label>
+                        @Html.TextBoxFor(model => model.Availablity, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Availablity, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Add</button>
+                    <span>@Html.DisplayFor(model => model.Message, new { @class = "text-success small" })</span>
+                }
+
+
+            </div>
+        </div>
+        <div class="pb-3">
+            @Html.ActionLink("View Added Rooms", "GetAllRooms")
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoomImage, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="file" id="imageInput" accept="image/*" />
-            <img id="preview" style="max-width: 100px; max-height: 100px;" />
-            <button id="convertToBase64" class="btn btn-primary">Convert to Base64</button>
-            <input type="hidden" id="base64Image" name="Base64Image" />
-            @Html.ValidationMessageFor(model => model.RoomImage, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoomType, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.RoomType, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RoomType, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoomDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.RoomDescription, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RoomDescription, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PricePerDay, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PricePerDay, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PricePerDay, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MaximumCapacity, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MaximumCapacity, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MaximumCapacity, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.NumberOfBeds, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NumberOfBeds, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NumberOfBeds, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Features, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Features, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Availablity, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Availablity, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Availablity, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<script>
-    document.getElementById('imageInput').addEventListener('change', function () {
-        var file = this.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            var base64Image = e.target.result;
-            document.getElementById('preview').src = base64Image;
-        };
-
-        reader.readAsDataURL(file);
-    });
-
-    document.getElementById('convertToBase64').addEventListener('click', function () {
-        var base64Image = document.getElementById('preview').src;
-        document.getElementById('base64Image').value = base64Image;
-    });
-</script>
-
-
-<div>
-    @Html.ActionLink("Back to List", "AdminViewRooms")
-</div>
+    <!-- Include Bootstrap and jQuery scripts here -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
