@@ -8,6 +8,7 @@ namespace HotelRoomBookingSystem.Models
 {
     public class Rooms
     {
+        public string RoomId { get; set; }
         [Required(ErrorMessage = "Room Number is required")]
         [StringLength(10, ErrorMessage = "Room Number must be at most 10 characters")]
         public string RoomNumber { get; set; }

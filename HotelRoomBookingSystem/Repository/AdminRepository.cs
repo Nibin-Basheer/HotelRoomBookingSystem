@@ -175,28 +175,37 @@ namespace HotelRoomBookingSystem.Repository
 
             SqlCommand sqlcommand = new SqlCommand("GetRooms",sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sqldataadapter = new SqlDataAdapter(sqlcommand);
+            DataTable datatable = new DataTable();
             sqlconnection.Open();
-            SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
+            sqldataadapter.Fill(datatable);
+            sqlconnection.Close();
 
-            while (sqldatareader.Read())
-            {
-                Rooms roomdata = new Rooms
+
+                foreach (DataRow datarow in datatable.Rows)
                 {
-                    RoomNumber = sqldatareader["RoomNumber"].ToString(),
-                    RoomImage = sqldatareader["RoomImage"].ToString(),
-                    RoomDescription = sqldatareader["RoomDescription"].ToString(),
-                    PricePerDay = Convert.ToDecimal(sqldatareader["PricePerDay"]),
-                    MaximumCapacity = Convert.ToInt32(sqldatareader["MaximumCapacity"]),
-                    NumberOfBeds = Convert.ToInt32(sqldatareader["NumberOfBeds"]),
-                    Features = sqldatareader["Features"].ToString(),
-                    Availablity = sqldatareader["Availablity"].ToString(),
+                    roomList.Add(
+                        new Rooms {
+
+                            
+                            RoomNumber = Convert.ToString(datarow["RoomNumber"]),
+                            RoomImage = Convert.ToString(datarow["RoomImage"]),
+                            
+                            RoomDescription = Convert.ToString(datarow["RoomDescription"]),
+                            PricePerDay = Convert.ToDecimal(datarow["PricePerDay"]),
+                            MaximumCapacity = Convert.ToInt32(datarow["MaximumCapacity"]),
+                            NumberOfBeds = Convert.ToInt32(datarow["NumberOfBeds"]),
+                            Features = Convert.ToString(datarow["RoomFeatures"]),
+                            Availablity = Convert.ToString(datarow["Availablity"]),
+
+
+
+                        }
+                        );
+                }
+                return roomList;
             
-
-
-                };
-                roomList.Add(roomdata);
-            }
-            return roomList;
+            
             }
             finally
             {
@@ -208,7 +217,35 @@ namespace HotelRoomBookingSystem.Repository
 
         }
 
-           
-        
+        public bool UpdateRoom(Rooms rooms, int Id)
+        {
+            SqlCommand sqlcommand = new SqlCommand("UpdateRoom",sqlconnection);
+            
+            sqlcommand.CommandType = CommandType.StoredProcedure;
+
+            sqlcommand.Parameters.AddWithValue("@RoomId", Id);
+            sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
+            sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
+            sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
+            sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
+            sqlcommand.Parameters.AddWithValue("@NumberOfBeds", rooms.NumberOfBeds);
+            sqlcommand.Parameters.AddWithValue("@RoomFeatures", rooms.Features);
+            sqlcommand.Parameters.AddWithValue("@Availablity", rooms.Availablity);
+
+
+            sqlconnection.Open();
+            int i = sqlcommand.ExecuteNonQuery();
+            sqlconnection.Close();
+            if (i > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }

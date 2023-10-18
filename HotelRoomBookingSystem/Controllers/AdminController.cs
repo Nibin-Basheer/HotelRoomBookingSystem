@@ -103,7 +103,7 @@ namespace HotelRoomBookingSystem.Controllers
                     string path = Path.Combine(location, filename);
                     file.SaveAs(path);
 
-                    var fullpath = Path.Combine("~\\images", filename);
+                    var fullpath = Server.MapPath("~/Content/images");
                     rooms.RoomImage = fullpath;//set
 
                 }
@@ -119,5 +119,27 @@ namespace HotelRoomBookingSystem.Controllers
            
             return View(repository.GetAllRooms().ToList());
         }
+
+        public ActionResult EditRoomDetails(int id)
+        {
+            return View(repository.GetAllRooms());
+
+        }
+        [HttpPost]
+
+        public ActionResult EditRoomDetails(Rooms rooms, int Id)
+        {
+            try
+            {
+
+                repository.UpdateRoom(rooms, Id);
+                return RedirectToAction("GetAllRooms");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

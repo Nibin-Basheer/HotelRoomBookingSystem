@@ -11,6 +11,7 @@ namespace HotelRoomBookingSystem.Controllers
     public class UserController : Controller
     {
         UserRepository repository = new UserRepository();
+        AdminRepository adminrespository = new AdminRepository();
         public ActionResult UserHome()
         {
             return View();
@@ -74,5 +75,13 @@ namespace HotelRoomBookingSystem.Controllers
             Session.RemoveAll();
             return RedirectToAction("Login", "Home");
         }
+        public ActionResult ViewRooms()
+        {
+
+            ModelState.Clear();
+            return View(adminrespository.GetAllRooms());
+        }
+
+
     }
 }

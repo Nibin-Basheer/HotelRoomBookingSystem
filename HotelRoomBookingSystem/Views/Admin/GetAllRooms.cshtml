@@ -5,64 +5,63 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>GetAllRooms</h2>
+
 
 <p>
     @Html.ActionLink("Create New Room Details", "AddRoom")
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Room Number</th>
-            <th>Room Image</th>
-            <th>Room Type</th>
-            <th>Room Description</th>
-            <th>Price Per Day</th>
-            <th>Maximum Capacity</th>
-            <th>Number of Beds</th>
-            <th>Features</th>
-            <th>Availability</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
 
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomImage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PricePerDay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaximumCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfBeds)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Features)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Availablity)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditRoom", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "DetailsRoom", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "DeleteRoom", new { /* id=item.PrimaryKey */ })
-                </td>
+                <th>Room Number</th>
+                <th>Room Image</th>
+                <th>Room Description</th>
+                <th>Price Per Day</th>
+                <th>Maximum Capacity</th>
+                <th>Number of Beds</th>
+                <th>Features</th>
+                <th>Availability</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomNumber)
+                    </td>
+                    <td>
+                        <img src="@item.RoomImage" alt="Room Image" style="max-width: 100px" />
+                    </td>
+                
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PricePerDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaximumCapacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfBeds)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Features)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Availablity)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditRoom", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary m-2" }) 
+                        @Html.ActionLink("Details", "DetailsRoom", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info m-2" }) 
+                        @Html.ActionLink("Delete", "DeleteRoom", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger m-2" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

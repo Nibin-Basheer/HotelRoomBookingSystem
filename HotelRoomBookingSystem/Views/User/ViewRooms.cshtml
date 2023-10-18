@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HotelRoomBookingSystem.Models.Rooms>
+@{
+    ViewBag.Title = "ViewRooms";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var room in Model)
+        {
+            <div class="col-md-4 p-3">
+                <div class="card">
+                    <img src="@Url.Content(room.RoomImage)" class="card-img-top" alt="Room Image" height="200px" width="150px" >
+                    <div class="card-body">
+                        <h5 class="card-title">@room.RoomType</h5>
+                        <p class="card-text">@room.RoomDescription</p>
+                        <p>Price per Day: Rs.@room.PricePerDay</p>
+                        <p>Maximum Capacity: @room.MaximumCapacity</p>
+                        <p>Number of Beds: @room.NumberOfBeds</p>
+                        <p>Features: @room.Features</p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
