@@ -59,17 +59,12 @@
 
 
                 </div>
-
-                <button type="submit" class="btn btn-primary btn-block">Update</button>
-                @*@if(ViewData.ModelState.IsValid)
-                {
-                    <p class="text-success small">@Model.Message>
-                }
-                else
-                {
-                    <p class="text-danger small">Validation failed. Please correct the errors.</p>
-                }*@
-
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block">Update</button>
+                    <p>@Html.DisplayFor(model => model.Message)</p>
+                </div>
+                
+               
             </form>
 
                 }

@@ -144,10 +144,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
-    <Content Include="Content\images\colorful_betta_fish-wallpaper-1366x768.jpg" />
-    <Content Include="Content\images\room01.jpg" />
-    <Content Include="Content\images\room3.jpg" />
-    <Content Include="Content\images\room4.jpg" />
+    <Content Include="images\colorful_betta_fish-wallpaper-1366x768.jpg" />
+    <Content Include="images\room01.jpg" />
+    <Content Include="images\room3.jpg" />
+    <Content Include="images\room4.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -166,6 +166,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PreventBack.js" />
+    <Content Include="Scripts\SelectCity.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -198,6 +199,8 @@
     <Content Include="Views\Admin\AddRoom.cshtml" />
     <Content Include="Views\Admin\GetAllRooms.cshtml" />
     <Content Include="Views\User\ViewRooms.cshtml" />
+    <Content Include="Views\Admin\EditRoomDetails.cshtml" />
+    <Content Include="Views\Admin\DeleteRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

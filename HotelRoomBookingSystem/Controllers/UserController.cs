@@ -61,13 +61,22 @@ namespace HotelRoomBookingSystem.Controllers
         }
         public ActionResult ProfileEdit(UserProfile userprofile)
         {
-            if (ModelState.IsValid) { 
-            repository.EditProfile(userprofile);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    repository.EditProfile(userprofile);
 
-            userprofile.Message = "Updated...!";
+                    userprofile.Message = "Updated...!";
+                    return View("ProfileLoad");
+                }
+
+                return View("ProfileLoad");
             }
-
-            return View("ProfileLoad");
+            catch(Exception ex)
+            {
+                throw new Exception("Error while editing profile", ex);
+            }
            
         }
         public ActionResult Logout()

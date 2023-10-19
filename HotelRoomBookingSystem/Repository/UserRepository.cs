@@ -114,18 +114,11 @@ namespace HotelRoomBookingSystem.Repository
                     sqlcommand.Parameters.AddWithValue("@Oldpassword", password.Oldpassword);
                     sqlcommand.Parameters.AddWithValue("@NewPassword", password.Newpassword);
 
-                    SqlParameter sqlparameter = new SqlParameter();
-                    sqlparameter.DbType = DbType.Int32;
-                    sqlparameter.ParameterName = "@status";
-                    sqlparameter.Direction = ParameterDirection.Output;
-
-                    sqlcommand.Parameters.Add(sqlparameter);
+        
                     sqlconnection.Open();
-                    sqlcommand.ExecuteNonQuery();
+                    int value=sqlcommand.ExecuteNonQuery();
                     sqlconnection.Close();
-                    int output = Convert.ToInt32(sqlparameter.Value);
-
-                    if (output > 0)
+                    if (value > 0)
                     {
                         return true;
                     }
@@ -173,6 +166,10 @@ namespace HotelRoomBookingSystem.Repository
             catch (Exception ex)
             {
                 throw new Exception("Error while retrieving the user profile.", ex);
+            }
+            finally
+            {
+                sqlconnection.Close();
             }
 
 

@@ -25,6 +25,8 @@ namespace HotelRoomBookingSystem.Repository
 
         public bool AddAdmin(AdminRegistration adminregistration)
         {
+            try 
+            { 
             SqlCommand sqlcommand = new SqlCommand("AddAdmin", sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
             sqlcommand.Parameters.AddWithValue("@Name", adminregistration.Name);
@@ -33,7 +35,7 @@ namespace HotelRoomBookingSystem.Repository
             
             sqlconnection.Open();
             int value = sqlcommand.ExecuteNonQuery();
-            sqlconnection.Close();
+            
             if (value > 0)
             {
                 return true;
@@ -41,6 +43,12 @@ namespace HotelRoomBookingSystem.Repository
             else
             {
                 return false;
+            }
+
+            }
+            finally
+            {
+                sqlconnection.Close();
             }
 
         }
@@ -64,7 +72,7 @@ namespace HotelRoomBookingSystem.Repository
                 sqlcommand.Parameters.Add(sqlparameter);
                 sqlconnection.Open();
                 sqlcommand.ExecuteNonQuery();
-                sqlconnection.Close();
+               
                 int output = Convert.ToInt32(sqlparameter.Value);
                 if (output == 1)
                 {
@@ -80,10 +88,15 @@ namespace HotelRoomBookingSystem.Repository
 
                 throw new Exception("Error while logging in.", ex);
             }
+            finally
+            {
+                sqlconnection.Close();
+            }
 
         }
         public bool AddNewAdmin(AdminRegistration adminregistration)
         {
+            try { 
             SqlCommand sqlcommand = new SqlCommand("AddAdmin", sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
             sqlcommand.Parameters.AddWithValue("@Name", adminregistration.Name);
@@ -92,7 +105,7 @@ namespace HotelRoomBookingSystem.Repository
 
             sqlconnection.Open();
             int value = sqlcommand.ExecuteNonQuery();
-            sqlconnection.Close();
+            
             if (value > 0)
             {
                 return true;
@@ -101,7 +114,11 @@ namespace HotelRoomBookingSystem.Repository
             {
                 return false;
             }
-
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
         }
         public List<UserRegistration> DisplayAllUser(UserRegistration useregistration)
         {
@@ -144,28 +161,34 @@ namespace HotelRoomBookingSystem.Repository
         }
         public bool AddRoom(Rooms rooms)
         {
-            SqlCommand sqlcommand = new SqlCommand("AddRoom", sqlconnection);
-            sqlcommand.CommandType = CommandType.StoredProcedure;
-            sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
-            sqlcommand.Parameters.AddWithValue("@RoomImage", rooms.RoomImage);
-            sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
-            sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
-            sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
-            sqlcommand.Parameters.AddWithValue("@NumberOfBeds", rooms.NumberOfBeds);
-            sqlcommand.Parameters.AddWithValue("@RoomFeatures", rooms.Features);
-            sqlcommand.Parameters.AddWithValue("@Availablity", rooms.Availablity);
-            sqlconnection.Open();
-            int value = sqlcommand.ExecuteNonQuery();
-            sqlconnection.Close();
-            if (value > 0)
+            try
             {
-                return true;
+                SqlCommand sqlcommand = new SqlCommand("AddRoom", sqlconnection);
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+                sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
+                sqlcommand.Parameters.AddWithValue("@RoomImage", rooms.RoomImage);
+                sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
+                sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
+                sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
+                sqlcommand.Parameters.AddWithValue("@NumberOfBeds", rooms.NumberOfBeds);
+                sqlcommand.Parameters.AddWithValue("@RoomFeatures", rooms.Features);
+                sqlcommand.Parameters.AddWithValue("@Availablity", rooms.Availablity);
+                sqlconnection.Open();
+                int value = sqlcommand.ExecuteNonQuery();
+                
+                if (value > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            finally
             {
-                return false;
+                sqlconnection.Close();
             }
-
         }
         public List<Rooms> GetAllRooms()
         {
@@ -187,7 +210,7 @@ namespace HotelRoomBookingSystem.Repository
                     roomList.Add(
                         new Rooms {
 
-                            
+                            RoomId = Convert.ToInt32(datarow["RoomId"]),
                             RoomNumber = Convert.ToString(datarow["RoomNumber"]),
                             RoomImage = Convert.ToString(datarow["RoomImage"]),
                             
@@ -219,18 +242,46 @@ namespace HotelRoomBookingSystem.Repository
 
         public bool UpdateRoom(Rooms rooms, int Id)
         {
-            SqlCommand sqlcommand = new SqlCommand("UpdateRoom",sqlconnection);
-            
+            try
+            {
+                SqlCommand sqlcommand = new SqlCommand("UpdateRoom", sqlconnection);
+
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+
+                sqlcommand.Parameters.AddWithValue("@RoomId", Id);
+                sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
+                sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
+                sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
+                sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
+                sqlcommand.Parameters.AddWithValue("@NumberOfBeds", rooms.NumberOfBeds);
+                sqlcommand.Parameters.AddWithValue("@RoomFeatures", rooms.Features);
+                sqlcommand.Parameters.AddWithValue("@Availablity", rooms.Availablity);
+
+
+                sqlconnection.Open();
+                int i = sqlcommand.ExecuteNonQuery();
+
+                if (i > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+        }
+        public bool DeleteRoom(int Id)
+        {
+
+            SqlCommand sqlcommand = new SqlCommand("DeleteRoom",sqlconnection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
 
             sqlcommand.Parameters.AddWithValue("@RoomId", Id);
-            sqlcommand.Parameters.AddWithValue("@RoomNumber", rooms.RoomNumber);
-            sqlcommand.Parameters.AddWithValue("@RoomDescription", rooms.RoomDescription);
-            sqlcommand.Parameters.AddWithValue("@PricePerDay", rooms.PricePerDay);
-            sqlcommand.Parameters.AddWithValue("@MaximumCapacity", rooms.MaximumCapacity);
-            sqlcommand.Parameters.AddWithValue("@NumberOfBeds", rooms.NumberOfBeds);
-            sqlcommand.Parameters.AddWithValue("@RoomFeatures", rooms.Features);
-            sqlcommand.Parameters.AddWithValue("@Availablity", rooms.Availablity);
 
 
             sqlconnection.Open();
