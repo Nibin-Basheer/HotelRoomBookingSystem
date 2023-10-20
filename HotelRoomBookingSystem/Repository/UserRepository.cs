@@ -207,6 +207,18 @@ namespace HotelRoomBookingSystem.Repository
                 throw new Exception("Error while editing the user profile.", ex);
             }
         }
+        public bool AddBooking(Rooms rooms)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error while adding a user.", ex);
+            }
+        }
 
 
     }

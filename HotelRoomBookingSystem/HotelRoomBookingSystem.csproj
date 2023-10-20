@@ -201,6 +201,7 @@
     <Content Include="Views\User\ViewRooms.cshtml" />
     <Content Include="Views\Admin\EditRoomDetails.cshtml" />
     <Content Include="Views\Admin\DeleteRoom.cshtml" />
+    <Content Include="Views\User\CheckinRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

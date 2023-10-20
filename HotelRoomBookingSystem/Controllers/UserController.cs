@@ -90,7 +90,15 @@ namespace HotelRoomBookingSystem.Controllers
             ModelState.Clear();
             return View(adminrespository.GetAllRooms());
         }
+        public ActionResult CheckinRoom(int id)
+        {
+            return View(adminrespository.GetAllRooms().Find(room => room.RoomId == id));
+        }
 
+        public ActionResult RoomBooking(int id)
+        {
+            
+        }
 
     }
 }

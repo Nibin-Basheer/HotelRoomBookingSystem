@@ -296,6 +296,23 @@ namespace HotelRoomBookingSystem.Repository
                 return false;
             }
         }
+        public int GetRoomCount()
+        {
+            string query = "SELECT COUNT(RoomId) FROM Tbl_Rooms";
+            SqlCommand sqlcommand = new SqlCommand(query, sqlconnection);
+            sqlconnection.Open();
+            string val = sqlcommand.ExecuteScalar().ToString();
+            int value = Convert.ToInt32(val);
+            sqlconnection.Close();
+            if (value > 0)
+            {
+                return value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
 
     }

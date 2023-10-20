@@ -91,6 +91,8 @@ namespace HotelRoomBookingSystem.Controllers
 
         public ActionResult AdminHome()
         {
+            int roomCount = repository.GetRoomCount();
+            ViewBag.RoomCount = roomCount;
             return View();
         }
         /// <summary>
@@ -166,7 +168,7 @@ namespace HotelRoomBookingSystem.Controllers
                     string path = Path.Combine(location, filename);
                     file.SaveAs(path);
 
-                    var fullpath = path.Combine("~\\images", filename);
+                    var fullpath = Path.Combine("~\\images", filename);
                     rooms.RoomImage = fullpath;//set
 
                 }
@@ -210,25 +212,30 @@ namespace HotelRoomBookingSystem.Controllers
                 return View();
             }
         }
-        [HttpDelete]
+        
+      
         public ActionResult DeleteRoom(int id)
         {
-            try
-            {
-              
-                if (repository.DeleteRoom(id))
-                {
-                    ViewBag.AlertMsg = "Room Data deleted successfully...!";
 
-                }
+            var data = repository.GetAllRooms().Find(st => st.RoomId == id);
+            if(data==null)
+            {
                 return RedirectToAction("GetAllRooms");
-
             }
-            catch
-            {
-                return View();
-            }
+            return View(data);
         }
+       
+        public ActionResult DeleteConfirmation(int id)
+        {
+
+            repository.DeleteRoom(id);
+
+            return RedirectToAction("GetAllRooms");
+        }
+        
+
+
+
 
     }
 }

@@ -14,13 +14,12 @@
                 <div class="card">
                     <img src="@Url.Content(@room.RoomImage)" class="card-img-top" alt="Room Image" height="200px" width="150px" >
                     <div class="card-body">
-                        <h5 class="card-title">@room.RoomType</h5>
-                        <p class="card-text">@room.RoomDescription</p>
-                        <p>Price per Day: Rs.@room.PricePerDay</p>
+                        <h5 class="card-title">@room.RoomDescription</h5>
+                        <p>Price per Day: ₹@room.PricePerDay</p>
                         <p>Maximum Capacity: @room.MaximumCapacity</p>
                         <p>Number of Beds: @room.NumberOfBeds</p>
                         <p>Features: @room.Features</p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
+                        @Html.ActionLink("Check Availablity", "CheckinRoom", new { id = room.RoomId }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             </div>
