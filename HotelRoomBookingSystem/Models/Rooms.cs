@@ -38,6 +38,20 @@ namespace HotelRoomBookingSystem.Models
         [Required(ErrorMessage = "Availability is required")]
         public string Availablity { get; set; }
 
-        public string Message { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Select CheckIn Date")]
+        public DateTime CheckinDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Select CheckOut Date")]
+        public DateTime CheckoutDate { get; set; }
+
+        [Required(ErrorMessage ="Enter Adult Count")]
+        public int Adult { get; set; }
+        public int Children { get; set; }
+    
+
+    public string Message { get; set; }
     }
 }

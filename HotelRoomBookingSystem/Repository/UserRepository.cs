@@ -83,8 +83,17 @@ namespace HotelRoomBookingSystem.Repository
                 sqlcommand.ExecuteNonQuery();
                 sqlconnection.Close();
                 int output = Convert.ToInt32(sqlparameter.Value);
-                if (output == 1)
+                if (output ==1)
                 {
+                    SqlCommand sqlcommand1 = new SqlCommand("GetUserId", sqlconnection);
+                    sqlcommand1.CommandType = CommandType.StoredProcedure;
+
+                    sqlcommand1.Parameters.AddWithValue("@Email", login.Email);
+                    sqlcommand1.Parameters.AddWithValue("@Password", login.Password);
+                    sqlconnection.Open();
+                    int value=sqlcommand1.ExecuteNonQuery();
+                    sqlconnection.Close();
+                    login.UserId = value;
                     return true;
                 }
                 else
@@ -207,16 +216,35 @@ namespace HotelRoomBookingSystem.Repository
                 throw new Exception("Error while editing the user profile.", ex);
             }
         }
-        public bool AddBooking(Rooms rooms)
+        public bool AddBooking(Rooms rooms,int id)
         {
             try
             {
-                
+                int userId = Convert.ToInt32(HttpContext.Current.Session["UserId"]);
+                SqlCommand sqlcommand = new SqlCommand("RoomBooking", sqlconnection);
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+                sqlcommand.Parameters.AddWithValue("@UserId", userId);
+                sqlcommand.Parameters.AddWithValue("@RoomId", id);
+                sqlcommand.Parameters.AddWithValue("CheckinDate",rooms.CheckinDate);
+                sqlcommand.Parameters.AddWithValue("CheckoutDate",rooms.CheckoutDate);
+                sqlcommand.Parameters.AddWithValue("Adult",rooms.Adult);
+                sqlcommand.Parameters.AddWithValue("Children",rooms.Children);
+
+                sqlconnection.Open();
+                int value = sqlcommand.ExecuteNonQuery();
+                if(value>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
 
-                throw new Exception("Error while adding a user.", ex);
+                throw new Exception("Error while booking a room", ex);
             }
         }
 

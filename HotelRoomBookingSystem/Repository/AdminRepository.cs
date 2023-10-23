@@ -313,6 +313,47 @@ namespace HotelRoomBookingSystem.Repository
                 return 0;
             }
         }
+        public CombinedModel GetUserBookingDetails()
+        {
+            CombinedModel combinedData = new CombinedModel
+            {
+                Users = new List<UserRegistration>(),
+                Rooms = new List<Rooms>(),
+                Payments = new List<Payment>()
+            };
+            string Query=@"select u.FirstName, u.Email, booking.CheckinDate, booking.CheckoutDate, booking.Adult,
+            booking.Children,payment.PaymentDate,payment.PaymentAmount,payment.PaymentMethod
+            from Tbl_Users as u join Tbl_RoomBookings as booking on u.UserId = booking.UserId join Tbl_Payments as payment 
+            on u.UserId = payment.UserId";
+
+            SqlCommand sqlcommand = new SqlCommand(Query,sqlconnection);
+            SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
+            while (sqldatareader.Read())
+            {
+                combinedData.Users.Add(new UserRegistration
+                {
+                    FirstName = Convert.ToString(sqldatareader["FirstName"]),
+                    Email = Convert.ToString(sqldatareader["Email"]),
+                });
+                combinedData.Rooms.Add(new Rooms
+                {
+                    CheckinDate=Convert.ToDateTime(sqldatareader["CheckinDate"]),
+                    CheckoutDate = Convert.ToDateTime(sqldatareader["CheckoutDate"]),
+                    Adult=Convert.ToInt32(sqldatareader["Adult"]),
+                    Children = Convert.ToInt32(sqldatareader["children"]),
+
+                });
+                combinedData.Payments.Add(new Payment
+                {
+                    PaymentDate= Convert.ToDateTime(sqldatareader["PaymentDate"]),
+                    PaymentAmount= Convert.ToDecimal(sqldatareader["PaymentAmount"]),
+                    PaymentMethod= Convert.ToString(sqldatareader["PaymentMethod"])
+                });
+            }
+
+             return combinedData;
+
+        }
 
 
     }

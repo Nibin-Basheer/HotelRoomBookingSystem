@@ -92,12 +92,27 @@ namespace HotelRoomBookingSystem.Controllers
         }
         public ActionResult CheckinRoom(int id)
         {
-            return View(adminrespository.GetAllRooms().Find(room => room.RoomId == id));
+            return View(adminrespository.GetAllRooms().Find(room=>room.RoomId==id));
         }
-
-        public ActionResult RoomBooking(int id)
+        [HttpPost]
+        public ActionResult RoomBooking(Rooms rooms, int id)
         {
-            
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    adminrespository.GetAllRooms().Find(room => room.RoomId == id);
+                    repository.AddBooking(rooms, id);
+                    return RedirectToAction("UserHome");
+                }
+
+                return RedirectToAction("CheckinRoom");
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
         }
 
     }

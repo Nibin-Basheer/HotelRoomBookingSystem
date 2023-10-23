@@ -1,0 +1,26 @@
+﻿@model HotelRoomBookingSystem.Models.CombinedModel
+@{
+    ViewBag.Title = "GetBookingDetails";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

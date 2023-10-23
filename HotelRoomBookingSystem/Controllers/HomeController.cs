@@ -66,6 +66,7 @@ namespace HotelRoomBookingSystem.Controllers
 
             if (isValidLogin)
             {
+                Session["UserId"] = login.UserId;
                 Session["Email"] = login.Email;
                 return RedirectToAction("UserHome","User");
             }

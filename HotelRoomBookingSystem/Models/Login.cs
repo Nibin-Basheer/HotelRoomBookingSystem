@@ -8,6 +8,7 @@ namespace HotelRoomBookingSystem.Models
 {
     public class Login
     {
+        public int UserId { set; get; }
         [Required(ErrorMessage = "Enter Email")]
         [EmailAddress(ErrorMessage = "Enter valid address")]
         public string Email { set; get; }

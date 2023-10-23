@@ -232,7 +232,12 @@ namespace HotelRoomBookingSystem.Controllers
 
             return RedirectToAction("GetAllRooms");
         }
-        
+        public ActionResult GetBookingDetails()
+        {
+
+            return View(repository.GetUserBookingDetails());
+        }
+
 
 
 

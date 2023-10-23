@@ -128,8 +128,10 @@
     </Compile>
     <Compile Include="Models\AdminLogin.cs" />
     <Compile Include="Models\AdminRegistration.cs" />
+    <Compile Include="Models\CombinedModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Password.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Rooms.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserRegistration.cs" />
@@ -202,6 +204,7 @@
     <Content Include="Views\Admin\EditRoomDetails.cshtml" />
     <Content Include="Views\Admin\DeleteRoom.cshtml" />
     <Content Include="Views\User\CheckinRoom.cshtml" />
+    <Content Include="Views\Admin\GetBookingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
