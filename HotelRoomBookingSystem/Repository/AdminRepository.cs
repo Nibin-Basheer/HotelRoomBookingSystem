@@ -327,6 +327,7 @@ namespace HotelRoomBookingSystem.Repository
             on u.UserId = payment.UserId";
 
             SqlCommand sqlcommand = new SqlCommand(Query,sqlconnection);
+            sqlconnection.Open();
             SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
             while (sqldatareader.Read())
             {
@@ -353,6 +354,46 @@ namespace HotelRoomBookingSystem.Repository
 
              return combinedData;
 
+        }
+
+        public int GetBookingCount()
+        {
+            string query = @"SELECT COUNT(*)
+            FROM(
+            SELECT u.FirstName, u.Email, booking.CheckinDate, booking.CheckoutDate, booking.Adult, booking.Children, payment.PaymentDate, payment.PaymentAmount, payment.PaymentMethod
+            FROM Tbl_Users AS u
+            JOIN Tbl_RoomBookings AS booking ON u.UserId = booking.UserId
+            JOIN Tbl_Payments AS payment ON u.UserId = payment.UserId) AS countofbooking";
+            SqlCommand sqlcommand = new SqlCommand(query, sqlconnection);
+            sqlconnection.Open();
+            string val = sqlcommand.ExecuteScalar().ToString();
+            int value = Convert.ToInt32(val);
+            sqlconnection.Close();
+            if (value > 0)
+            {
+                return value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int GetUsersCount()
+        {
+            string query = "SELECT COUNT(UserId) FROM Tbl_Users";
+            SqlCommand sqlcommand = new SqlCommand(query, sqlconnection);
+            sqlconnection.Open();
+            string val = sqlcommand.ExecuteScalar().ToString();
+            int value = Convert.ToInt32(val);
+            sqlconnection.Close();
+            if (value > 0)
+            {
+                return value;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
 

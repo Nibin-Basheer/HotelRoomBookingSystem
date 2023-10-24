@@ -10,6 +10,7 @@ namespace HotelRoomBookingSystem.Controllers
     public class HomeController : Controller
     {
         UserRepository repository = new UserRepository();
+        AdminRepository adminRepository = new AdminRepository();
         /// <summary>
         /// This is Main home page action
         /// </summary>
@@ -79,6 +80,20 @@ namespace HotelRoomBookingSystem.Controllers
         }
             return View("Login", login);
     }
+        public JsonResult CheckEmailAvailablity(UserRegistration userregistration,string userData)
+        {
+            System.Threading.Thread.Sleep(200);
+            var searchData = adminRepository.DisplayAllUser(userregistration).Where(x => x.Email == userData).SingleOrDefault();
+            if (searchData != null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+
+        }
 
 
 

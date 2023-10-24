@@ -48,7 +48,7 @@
                         @Html.TextBoxFor(model => model.Children, new { @type = "number", @class = "form-control", @id = "Children", @name = "Children" })
                         @Html.ValidationMessageFor(model => model.Children, "", new { @class = "text-danger small" })
                     </div>
-                    @Html.ActionLink("Book Now", "RoomBooking", "User", new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink("Book Now", "RoomBooking", "User", new {id = Model.RoomId }, new { @class = "btn btn-primary btn-block" })
                 </div>
 
             </div>

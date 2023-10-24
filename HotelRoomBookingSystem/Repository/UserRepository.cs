@@ -247,6 +247,81 @@ namespace HotelRoomBookingSystem.Repository
                 throw new Exception("Error while booking a room", ex);
             }
         }
+        public CombinedModel GetBookingDetails()
+        {
+            CombinedModel combinedData = new CombinedModel
+            {
+                Users = new List<UserRegistration>(),
+                Rooms = new List<Rooms>(),
+                Payments = new List<Payment>()
+            };
+            string userEmail = HttpContext.Current.Session["Email"].ToString();
+            //join query to join 3 tables
+            string Query = @"select u.FirstName, u.Email, booking.CheckinDate, booking.CheckoutDate, booking.Adult,
+            booking.Children,payment.PaymentDate,payment.PaymentAmount,payment.PaymentMethod
+            from Tbl_Users as u join Tbl_RoomBookings as booking on u.UserId = booking.UserId join Tbl_Payments as payment 
+            on u.UserId = payment.UserId where u.Email='"+userEmail+"'";
+
+            SqlCommand sqlcommand = new SqlCommand(Query, sqlconnection);
+            sqlconnection.Open();
+            SqlDataReader sqldatareader = sqlcommand.ExecuteReader();
+            while (sqldatareader.Read())
+            {
+                combinedData.Users.Add(new UserRegistration
+                {
+                    FirstName = Convert.ToString(sqldatareader["FirstName"]),
+                    Email = Convert.ToString(sqldatareader["Email"]),
+                });
+                combinedData.Rooms.Add(new Rooms
+                {
+                    CheckinDate = Convert.ToDateTime(sqldatareader["CheckinDate"]),
+                    CheckoutDate = Convert.ToDateTime(sqldatareader["CheckoutDate"]),
+                    Adult = Convert.ToInt32(sqldatareader["Adult"]),
+                    Children = Convert.ToInt32(sqldatareader["children"]),
+
+                });
+                combinedData.Payments.Add(new Payment
+                {
+                    PaymentDate = Convert.ToDateTime(sqldatareader["PaymentDate"]),
+                    PaymentAmount = Convert.ToDecimal(sqldatareader["PaymentAmount"]),
+                    PaymentMethod = Convert.ToString(sqldatareader["PaymentMethod"])
+                });
+            }
+
+            return combinedData;
+
+        }
+        public bool AddPayment(Payment payment, int id)
+        {
+            try
+            {
+                int userId = Convert.ToInt32(HttpContext.Current.Session["UserId"]);
+                SqlCommand sqlcommand = new SqlCommand("payment", sqlconnection);
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+                sqlcommand.Parameters.AddWithValue("@UserId", userId);
+                sqlcommand.Parameters.AddWithValue("@RoomId", id);
+                sqlcommand.Parameters.AddWithValue("@PaymentDate", payment.PaymentDate);
+                sqlcommand.Parameters.AddWithValue("@PaymentAmount", payment.PaymentAmount);
+                sqlcommand.Parameters.AddWithValue("@PaymentMethod", payment.PaymentMethod);
+             
+
+                sqlconnection.Open();
+                int value = sqlcommand.ExecuteNonQuery();
+                if (value > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error while making payment", ex);
+            }
+        }
 
 
     }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using HotelRoomBookingSystem.Models;
+﻿using HotelRoomBookingSystem.Models;
 using HotelRoomBookingSystem.Repository;
+using System;
+using System.Web.Mvc;
 
 namespace HotelRoomBookingSystem.Controllers
 {
@@ -45,9 +42,10 @@ namespace HotelRoomBookingSystem.Controllers
 
         public ActionResult ProfileLoad(UserProfile userprofile)
         {
+            
 
             repository.UserProfile(userprofile);
-
+            ModelState.Clear();
             return View(new UserProfile
             {
                 FirstName = userprofile.FirstName,
@@ -94,7 +92,7 @@ namespace HotelRoomBookingSystem.Controllers
         {
             return View(adminrespository.GetAllRooms().Find(room=>room.RoomId==id));
         }
-        [HttpPost]
+       
         public ActionResult RoomBooking(Rooms rooms, int id)
         {
 
@@ -102,9 +100,9 @@ namespace HotelRoomBookingSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    adminrespository.GetAllRooms().Find(room => room.RoomId == id);
+                    
                     repository.AddBooking(rooms, id);
-                    return RedirectToAction("UserHome");
+                    return RedirectToAction("PaymentPage");
                 }
 
                 return RedirectToAction("CheckinRoom");
@@ -113,6 +111,27 @@ namespace HotelRoomBookingSystem.Controllers
             {
                 throw new Exception("Error", ex);
             }
+        }
+        public ActionResult PaymentPage(Payment payment, int id)
+        {
+
+            try
+            {
+                repository.AddPayment(payment, id);
+                return RedirectToAction("UserHome");
+            }
+
+                
+            catch (Exception ex)
+            {
+                return View();
+                throw new Exception("Error", ex);
+            }
+        }
+        public ActionResult GetBookingDetails()
+        {
+
+            return View(repository.GetBookingDetails());
         }
 
     }

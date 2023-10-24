@@ -169,6 +169,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PreventBack.js" />
     <Content Include="Scripts\SelectCity.js" />
+    <Content Include="Scripts\UserCheck.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -205,6 +206,8 @@
     <Content Include="Views\Admin\DeleteRoom.cshtml" />
     <Content Include="Views\User\CheckinRoom.cshtml" />
     <Content Include="Views\Admin\GetBookingDetails.cshtml" />
+    <Content Include="Views\User\GetBookingDetails.cshtml" />
+    <Content Include="Views\User\PaymentPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

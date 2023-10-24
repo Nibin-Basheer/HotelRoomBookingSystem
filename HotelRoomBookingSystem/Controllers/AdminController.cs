@@ -93,6 +93,13 @@ namespace HotelRoomBookingSystem.Controllers
         {
             int roomCount = repository.GetRoomCount();
             ViewBag.RoomCount = roomCount;
+
+            int bookingCount = repository.GetBookingCount();
+            ViewBag.BookingCount = bookingCount;
+
+            int userCount = repository.GetUsersCount();
+            ViewBag.UserCount = userCount;
+
             return View();
         }
         /// <summary>
