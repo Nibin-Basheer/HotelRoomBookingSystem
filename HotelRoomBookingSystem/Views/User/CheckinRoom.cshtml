@@ -4,27 +4,28 @@
     ViewBag.Title = "CheckinRoom";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-@using (Html.BeginForm("RoomBooking", "User", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <div class="container mt-5 p-3">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="@Url.Content(Model.RoomImage)" class="img-fluid" alt="Room Image">
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.RoomNumber</h5>
-                        <p class="card-text">@Model.RoomDescription</p>
-                        <p>Per Day: ₹@Model.PricePerDay</p>
-                        <p>Maximum Capacity: @Model.MaximumCapacity</p>
-                        <p>Number of Beds: @Model.NumberOfBeds</p>
-                        <p>@Model.Features</p>
-                        <p>@Model.Availablity</p>
-                    </div>
-                </div>
 
+<div class="container mt-5 p-3">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Url.Content(Model.RoomImage)" class="img-fluid" alt="Room Image">
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.RoomNumber</h5>
+                    <p class="card-text">@Model.RoomDescription</p>
+                    <p>Per Day: ₹@Model.PricePerDay</p>
+                    <p>Maximum Capacity: @Model.MaximumCapacity</p>
+                    <p>Number of Beds: @Model.NumberOfBeds</p>
+                    <p>@Model.Features</p>
+                    <p>@Model.Availablity</p>
+                </div>
+            </div>
+            @using (Html.BeginForm("CheckinRoom", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="form">
                     @Html.HiddenFor(model => model.RoomId)
@@ -40,18 +41,19 @@
                     </div>
                     <div class="form-group">
                         <label for="Adult">Adult</label>
-                        @Html.TextBoxFor(model => model.Adult, new { @type = "number", @class = "form-control", @id = "Adult", @name = "Adult" })
+                        @Html.TextBoxFor(model => model.Adult, new { @type = "number", @class = "form-control", @id = "Adult" })
                         @Html.ValidationMessageFor(model => model.Adult, "", new { @class = "text-danger small" })
                     </div>
                     <div class="form-group">
                         <label for="Children">Children</label>
-                        @Html.TextBoxFor(model => model.Children, new { @type = "number", @class = "form-control", @id = "Children", @name = "Children" })
+                        @Html.TextBoxFor(model => model.Children, new { @type = "number", @class = "form-control", @id = "Children" })
                         @Html.ValidationMessageFor(model => model.Children, "", new { @class = "text-danger small" })
                     </div>
-                    @Html.ActionLink("Book Now", "RoomBooking", "User", new {id = Model.RoomId }, new { @class = "btn btn-primary btn-block" })
+                    <div class="form-group">
+                        <input type="submit" value="Book Now" class="btn btn-primary btn-block" />
+                    </div>
                 </div>
-
-            </div>
+            }
         </div>
     </div>
-}
+</div>

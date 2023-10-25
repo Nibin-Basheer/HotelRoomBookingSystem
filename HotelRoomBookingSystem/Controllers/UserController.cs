@@ -42,7 +42,7 @@ namespace HotelRoomBookingSystem.Controllers
 
         public ActionResult ProfileLoad(UserProfile userprofile)
         {
-            
+
 
             repository.UserProfile(userprofile);
             ModelState.Clear();
@@ -66,16 +66,16 @@ namespace HotelRoomBookingSystem.Controllers
                     repository.EditProfile(userprofile);
 
                     userprofile.Message = "Updated...!";
-                    return View("ProfileLoad");
+                    return View("ProfileLoad",userprofile);
                 }
 
                 return View("ProfileLoad");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error while editing profile", ex);
             }
-           
+
         }
         public ActionResult Logout()
         {
@@ -90,27 +90,28 @@ namespace HotelRoomBookingSystem.Controllers
         }
         public ActionResult CheckinRoom(int id)
         {
-            return View(adminrespository.GetAllRooms().Find(room=>room.RoomId==id));
+            var room = adminrespository.GetAllRooms().Find(r => r.RoomId == id);
+
+            if (room != null)
+            {
+                return View(room);
+            }
+
+
+            return HttpNotFound();
         }
-       
-        public ActionResult RoomBooking(Rooms rooms, int id)
+        [HttpPost]
+        public ActionResult CheckinRoom(Rooms rooms)
         {
-
-            try
+            var room = adminrespository.GetAllRooms().Find(r => r.RoomId == rooms.RoomId);
+            if (ModelState.IsValid && room != null)
             {
-                if (ModelState.IsValid)
-                {
-                    
-                    repository.AddBooking(rooms, id);
-                    return RedirectToAction("PaymentPage");
-                }
+                
+                repository.AddBooking(rooms, rooms.RoomId);
+                return RedirectToAction("PaymentPage");
+            }
 
-                return RedirectToAction("CheckinRoom");
-            }
-            catch(Exception ex)
-            {
-                throw new Exception("Error", ex);
-            }
+            return View(room);
         }
         public ActionResult PaymentPage(Payment payment, int id)
         {

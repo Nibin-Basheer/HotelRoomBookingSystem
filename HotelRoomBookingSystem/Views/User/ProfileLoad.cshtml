@@ -22,7 +22,7 @@
                 @using (Html.BeginForm("ProfileEdit", "User", FormMethod.Post))
                 {
 
-            <form>
+            <div class="form">
 
 
 
@@ -60,12 +60,15 @@
 
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary btn-block">Update</button>
-                    <p>@Html.DisplayFor(model => model.Message)</p>
+                    <input type="submit" value="Update" class="btn btn-primary btn-block">
+                    
+                </div>
+                <div>
+                    <p class="text-success">@Html.DisplayFor(model => model.Message)</p>
                 </div>
                 
                
-            </form>
+            </div>
 
                 }
 

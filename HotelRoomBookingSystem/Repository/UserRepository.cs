@@ -126,7 +126,7 @@ namespace HotelRoomBookingSystem.Repository
         
                     sqlconnection.Open();
                     int value=sqlcommand.ExecuteNonQuery();
-                    sqlconnection.Close();
+                    
                     if (value > 0)
                     {
                         return true;
@@ -145,6 +145,11 @@ namespace HotelRoomBookingSystem.Repository
             catch (Exception ex)
             {
                 throw new Exception("Error while changing the password.", ex);
+            }
+            finally
+            {
+                sqlconnection.Close();
+
             }
         }
         public bool UserProfile(UserProfile userprofile)
@@ -201,7 +206,7 @@ namespace HotelRoomBookingSystem.Repository
 
                 sqlconnection.Open();
                 int value = sqlcommand.ExecuteNonQuery();
-                sqlconnection.Close();
+              
                 if (value > 0)
                 {
                     return true;
@@ -214,6 +219,10 @@ namespace HotelRoomBookingSystem.Repository
             catch (Exception ex)
             {
                 throw new Exception("Error while editing the user profile.", ex);
+            }
+            finally
+            {
+                sqlconnection.Close();
             }
         }
         public bool AddBooking(Rooms rooms,int id)
@@ -245,6 +254,10 @@ namespace HotelRoomBookingSystem.Repository
             {
 
                 throw new Exception("Error while booking a room", ex);
+            }
+            finally
+            {
+                sqlconnection.Close();
             }
         }
         public CombinedModel GetBookingDetails()
@@ -296,7 +309,7 @@ namespace HotelRoomBookingSystem.Repository
             try
             {
                 int userId = Convert.ToInt32(HttpContext.Current.Session["UserId"]);
-                SqlCommand sqlcommand = new SqlCommand("payment", sqlconnection);
+                SqlCommand sqlcommand = new SqlCommand("Payment", sqlconnection);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
                 sqlcommand.Parameters.AddWithValue("@UserId", userId);
                 sqlcommand.Parameters.AddWithValue("@RoomId", id);
@@ -320,6 +333,10 @@ namespace HotelRoomBookingSystem.Repository
             {
 
                 throw new Exception("Error while making payment", ex);
+            }
+            finally
+            {
+                sqlconnection.Close();
             }
         }
 

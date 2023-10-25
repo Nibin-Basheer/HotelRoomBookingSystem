@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center p-2">
             <div class="col-md-4">
                 <h2 class="text-center mt-2">Add New Admin</h2>
                 @using (Html.BeginForm("AddAdmin", "Admin", FormMethod.Post))
@@ -51,7 +51,7 @@
                             @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger small" })
 
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Add</button><span>@Html.DisplayFor(m => m.Message, new { @class = "text-success small" })</span>
+                        <button type="submit" class="btn btn-primary btn-block">Add</button><span class="text-success">@Html.DisplayFor(m => m.Message)</span>
 
           
                     </form>

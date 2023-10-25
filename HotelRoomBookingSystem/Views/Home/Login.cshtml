@@ -22,28 +22,43 @@
                 <h2 class="login-heading">Login</h2>
                 @using (Html.BeginForm("LoginClick", "Home", FormMethod.Post))
                 {
-                    <form>
-                        <div class="form-group">
-                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control",@placeholder="Enter Email" })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
-                        </div>
-                        <div class="form-group">
-                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Enter Password" })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger small" })
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block login-btn-primary">Login</button><span>@Html.DisplayFor(m => m.Message, "", new { @class = "text-danger small" })</span> 
-                    </form>
-                }
-                    <div class="text-center mt-3">
-                        <a href="#" class="login-link">Forgot Password?</a>
-                    </div>
-                    <div class="text-center mt-2">
-                        <p>Don't have an account?@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "login-link" }) </p>
-                    </div>
-                   
+            <form>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Email, new {@type="email" ,@class = "form-control", @placeholder = "Enter Email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
                 </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Password, new {@type="password",@class = "form-control", @placeholder = "Enter Password", @id = "password-input" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger small" })
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="show-password"> Show Password
+                </div>
+                <button type="submit" class="btn btn-primary btn-block login-btn-primary">Login</button><span>@Html.DisplayFor(m => m.Message, "", new { @class = "text-danger small" })</span>
+            </form>
+                }
+                <div class="text-center mt-3">
+                    <a href="#" class="login-link">Forgot Password?</a>
+                </div>
+                <div class="text-center mt-2">
+                    <p>Don't have an account?@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "login-link" }) </p>
+                </div>
+
+            </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#show-password").change(function () {
+                var passwordInput = $("#password-input");
+                if ($(this).is(":checked")) {
+                    passwordInput.attr("type", "text");
+                } else {
+                    passwordInput.attr("type", "password");
+                }
+            });
+        });
+    </script>
 
     <!-- Include Bootstrap and jQuery scripts here -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
