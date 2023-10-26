@@ -24,15 +24,15 @@
                 {
             <form>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.Email, new {@type="email" ,@class = "form-control", @placeholder = "Enter Email" })
+                    @Html.TextBoxFor(model => model.Email, new { @type="email" ,@class = "form-control", @placeholder = "Enter Email" })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.Password, new {@type="password",@class = "form-control", @placeholder = "Enter Password", @id = "password-input" })
+                    @Html.TextBoxFor(model => model.Password, new { @type="password",@class = "form-control", @placeholder = "Enter Password", @id = "password-input" })
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger small" })
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" id="show-password"> Show Password
+                    <input type="checkbox" id="show-password" onclick="showPassword()"> Show Password
                 </div>
                 <button type="submit" class="btn btn-primary btn-block login-btn-primary">Login</button><span>@Html.DisplayFor(m => m.Message, "", new { @class = "text-danger small" })</span>
             </form>
@@ -47,17 +47,17 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $("#show-password").change(function () {
-                var passwordInput = $("#password-input");
-                if ($(this).is(":checked")) {
-                    passwordInput.attr("type", "text");
-                } else {
-                    passwordInput.attr("type", "password");
-                }
-            });
-        });
+    <script type="text/javascript">
+        function showPassword(){
+            var show = document.getElementById('password-input');
+            if (show.type == 'password') {
+                show.type = 'text';
+            }
+            else {
+                show.type='password'
+            }
+
+        }
     </script>
 
     <!-- Include Bootstrap and jQuery scripts here -->

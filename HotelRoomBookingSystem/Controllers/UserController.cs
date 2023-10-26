@@ -123,7 +123,7 @@ namespace HotelRoomBookingSystem.Controllers
             }
 
                 
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return View();
                 throw new Exception("Error", ex);
@@ -135,5 +135,6 @@ namespace HotelRoomBookingSystem.Controllers
             return View(repository.GetBookingDetails());
         }
 
+       
     }
 }

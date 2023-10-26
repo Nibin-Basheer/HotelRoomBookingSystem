@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.WebPages.Html;
 
 namespace HotelRoomBookingSystem.Models
@@ -27,7 +26,7 @@ namespace HotelRoomBookingSystem.Models
 
         [Required(ErrorMessage = "Enter Email")]
         [EmailAddress(ErrorMessage = "Enter valid address")]
-        [Remote("IsEmailAvailable", "Home", ErrorMessage = "This email is already in use.")]
+       
         public string Email { set; get; }
         [Required(ErrorMessage = "Enter the Address")]
         public string Address { set; get; }

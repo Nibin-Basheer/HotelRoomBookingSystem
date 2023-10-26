@@ -95,14 +95,7 @@ namespace HotelRoomBookingSystem.Controllers
 
         }
 
-        public JsonResult IsEmailAvailable(string Email,UserRegistration user)
-        {
-            // Check if the email exists in your database
-            bool isEmailAvailable =adminRepository.DisplayAllUser().Find(u=>u.Email==Email);
-            return Json(isEmailAvailable, JsonRequestBehavior.AllowGet);
-        }
-
-
+        
 
     }
 }
